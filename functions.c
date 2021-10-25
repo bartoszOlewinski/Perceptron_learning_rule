@@ -1,5 +1,3 @@
-#include "math.h"
-#include "stdlib.h"
 #include "stdio.h"
 
 int perceptronComputation(float weight0, float weight1, float weight2,
@@ -19,5 +17,5 @@ float adjustWeights(float learning_rate, float weight, int inputNode,
 }
 
 void printMenu() {
-    printf("\n---\n1. input values to determine AND.\n2. exit loop.\n");
+    printf("\n-------menu--\n1. input values to determine output.\n2. exit loop.\n");
 }

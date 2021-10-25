@@ -5,7 +5,7 @@
 //this program will show a single perceptron
 
 static float LEARNING_RATE = 0.1;
-static int PREDICTED_CORRECTLY = 50;
+static int MIN_CORRECT_GUESSES = 20;
 
 
 int main() {
@@ -52,15 +52,16 @@ int main() {
     //learning loop
     do {
         for (int i = 0; i < numberOfSets; i++) {
-            //check the output with current nodes
+            //check the output of dataset 'i' with current weights
             computationOutcome = perceptronComputation(weight0, weight1, weight2, node1s[i], node2s[i]);
             printf("\n----\nUsing weights: %f, %f, %f, the perceptron output is %d.\n"
                    "Correct answer is %d.", weight0, weight1, weight2, computationOutcome, targetOutputs[i]);
-            //if not we need to adjust them
+            //if output not correct update weights using perceptron learning rule
             if (computationOutcome != targetOutputs[i]) {
-                weight0 = adjustWeights(0.1, weight0, node0, targetOutputs[i], computationOutcome);
-                weight1 = adjustWeights(0.1, weight1, node1s[i], targetOutputs[i], computationOutcome);
-                weight2 = adjustWeights(0.1, weight2, node2s[i], targetOutputs[i], computationOutcome);
+                weight0 = adjustWeights(LEARNING_RATE, weight0, node0, targetOutputs[i], computationOutcome);
+                weight1 = adjustWeights(LEARNING_RATE, weight1, node1s[i], targetOutputs[i], computationOutcome);
+                weight2 = adjustWeights(LEARNING_RATE, weight2, node2s[i], targetOutputs[i], computationOutcome);
+
                 howManyIncorrect++;
                 printf("\nIncorrect guess.");
             } else {
@@ -70,12 +71,13 @@ int main() {
             printf("\nCorrectly guessed answers: %d.", howManyCorrect);
             printf("\nIncorrectly guess answers: %d.", howManyIncorrect);
         }
-        if (howManyCorrect > 50) {
+        //if perceptron performed an amount of correct guesses exit the learning loop
+        if (howManyCorrect > MIN_CORRECT_GUESSES) {
             hasLearned = 1;
         }
-
     } while(!hasLearned);
 
+    //menu section for checking what the perceptron will output after learning is done
     int choice;
     int nodeOne, nodeTwo;
     int output;
@@ -91,13 +93,13 @@ int main() {
                 printf("\nNode2: ");
                 scanf("%d", &nodeTwo);
                 output = perceptronComputation(weight0, weight1, weight2, nodeOne, nodeTwo);
-                printf("\nAND for %d and %d is %d.", nodeOne, nodeTwo, output);
+                printf("\nOutput for %d and %d is %d.", nodeOne, nodeTwo, output);
                 break;
             case 2:
                 exit = 1;
                 break;
             default:
-                printf("xd\n");
+                printf("\nTry again.\n");
                 break;
         }
 
