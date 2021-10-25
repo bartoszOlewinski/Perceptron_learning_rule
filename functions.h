@@ -3,5 +3,5 @@
 int perceptronComputation(float weight0, float weight1, float weight2,
                           int node1, int node2);
 
-void adjustWeights(float learning_rate, float *weight, int inputNode,
+float adjustWeights(float learning_rate, float weight, int inputNode,
                    int expectedOutcome, int actualOutcome);
