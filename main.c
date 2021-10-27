@@ -1,5 +1,6 @@
 #include "functions.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 //this program will show a single perceptron
