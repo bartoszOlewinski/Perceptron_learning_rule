@@ -7,5 +7,6 @@ Runs on C99, compiled using gcc.
 
 
 ----EDIT----
+
 This perceptron training rule can run with 1 (true) and 0 (false) if in perceptronComputation function second
 return statement's value is changed from -1 to 0, and if node0 in main() is changed to -1.
